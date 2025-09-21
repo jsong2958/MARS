@@ -7,6 +7,7 @@ import pygame
 from pygame.locals import *
 from sympy import ceiling
 from sympy.codegen.fnodes import merge
+from algorithms import wall_hugger
 
 class TreeNode:
     def __init__(self, data, parent=None, children=None):
@@ -366,13 +367,13 @@ class Maze:
             lines_path = []
             if sol_path:
                 if len(sol_path) != len(sol)+2:
-                    sol_path.insert(0,(-1,0))
-                    sol_path.append((sol[-1][0]+1,sol[-1][1]))
+                    sol_path.insert(0,(0,-1))
+                    sol_path.append((sol[-1][0],sol[-1][1]+1))
                 for tile in sol_path:
-                    lines_path.append((100+tile[0]*side_length+side_length/2,100+tile[1]*side_length+side_length/2))
+                    lines_path.append((100+tile[1]*side_length+side_length/2,100+tile[0]*side_length+side_length/2))
             if path:
                 for tile in path:
-                    lines_path.append((100+tile[0]*side_length+side_length/2,100+tile[1]*side_length+side_length/2))
+                    lines_path.append((100+tile[1]*side_length+side_length/2,100+tile[0]*side_length+side_length/2))
 
             if lines_path:
                 pygame.draw.lines(window, (255,0,0), False, lines_path, 4)
@@ -384,4 +385,7 @@ class Maze:
 
 if __name__ == "__main__":
     my_maze = Maze(10, 10, "default", "default", 0)
-    my_maze.disp_maze()
+    path = wall_hugger(my_maze)
+    my_maze.disp_maze(sol=path)
+
+
