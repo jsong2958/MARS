@@ -1,3 +1,6 @@
+import collections
+
+
 def wall_hugger(maze):
     path = []
     grid = maze.maze
@@ -52,24 +55,5 @@ def wall_hugger(maze):
     return path
 
 
-def bfs(maze):
-    path = []
-    directions = [[1,0],[0,1],[-1,0],[0,-1]]
-
-    visited = []
-    q = []
-    q.append([0,0])
-    visited[0].insert(0, False)
-
-    while (q):
-        size = len(q)
-
-        for i in range(size):
-            cur = q.pop()
-            r = cur[0]
-            c = cur[1]
-            for dir in directions:
-                row = r + dir[0]
-                col = c + dir[1]
 
 
