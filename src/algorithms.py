@@ -1,6 +1,6 @@
-def wall_hugger(maze_obj):
+def wall_hugger(maze):
     path = []
-    maze = maze_obj.maze
+    grid = maze.maze
 
 
     wallMap = {
@@ -22,18 +22,18 @@ def wall_hugger(maze_obj):
     path.append(curPos.copy())
     
 
-    while (tuple(curPos) != maze_obj.end):
+    while (tuple(curPos) != maze.end):
 
         r = curPos[0]
         c = curPos[1]
 
-        if (not getattr(maze[r][c], leftMap[tuple(forward)])):
+        if (not getattr(grid[r][c], leftMap[tuple(forward)])):
             temp = forward[0]
             forward[0] = -1 * forward[1]
             forward[1] = temp
             
 
-        while (getattr(maze[r][c], wallMap[tuple(forward)])):
+        while (getattr(grid[r][c], wallMap[tuple(forward)])):
             temp = forward[0]
             forward[0] = forward[1]
             forward[1] = -1 * temp
