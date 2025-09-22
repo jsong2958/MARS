@@ -4,3 +4,4 @@ log/
 *.tar
 .vscode/
 *.db
+src/__pycache__
